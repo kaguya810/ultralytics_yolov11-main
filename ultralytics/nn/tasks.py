@@ -1,16 +1,21 @@
-# Ultralytics YOLO 🚀, AGPL-3.0 license
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
 
 import contextlib
+import pickle
+import re
+import types
 from copy import deepcopy
 from pathlib import Path
 
 import torch
 import torch.nn as nn
 
+from ultralytics.nn.autobackend import check_class_names
 from ultralytics.nn.modules import (
     AIFI,
     C1,
     C2,
+    C2PSA,
     C3,
     C3TR,
     ELAN1,
@@ -19,6 +24,7 @@ from ultralytics.nn.modules import (
     SPP,
     SPPELAN,
     SPPF,
+    A2C2f,
     AConv,
     ADown,
     Bottleneck,
@@ -26,7 +32,9 @@ from ultralytics.nn.modules import (
     C2f,
     C2fAttn,
     C2fCIB,
+    C2fPSA,
     C3Ghost,
+    C3k2,
     C3x,
     CBFuse,
     CBLinear,
@@ -44,6 +52,7 @@ from ultralytics.nn.modules import (
     HGBlock,
     HGStem,
     ImagePoolingAttn,
+    Index,
     Pose,
     RepC3,
     RepConv,
@@ -53,10 +62,11 @@ from ultralytics.nn.modules import (
     RTDETRDecoder,
     SCDown,
     Segment,
+    TorchVision,
     WorldDetect,
     v10Detect,
 )
-from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, colorstr, emojis, yaml_load
+from ultralytics.utils import DEFAULT_CFG_DICT, DEFAULT_CFG_KEYS, LOGGER, yaml_load, colorstr, emojis
 from ultralytics.utils.checks import check_requirements, check_suffix, check_yaml
 from ultralytics.utils.loss import (
     E2EDetectLoss,
@@ -67,6 +77,7 @@ from ultralytics.utils.loss import (
     v8SegmentationLoss,
 )
 from ultralytics.utils.ops import make_divisible
+from ultralytics.utils.patches import torch_load
 from ultralytics.utils.plotting import feature_visualization
 from ultralytics.utils.torch_utils import (
     fuse_conv_and_bn,
@@ -75,8 +86,16 @@ from ultralytics.utils.torch_utils import (
     intersect_dicts,
     model_info,
     scale_img,
+    smart_inference_mode,
     time_sync,
 )
+"""=====加载新模块====="""
+from ultralytics.nn.modules.new.LSConv import *
+from ultralytics.nn.modules.new.KSFA import *
+from ultralytics.nn.modules.new.LSA import *
+from ultralytics.nn.modules.new.GSA import *
+from ultralytics.nn.modules.new.FA import *
+"""以后都在这里添加新模块"""
 
 try:
     import thop
