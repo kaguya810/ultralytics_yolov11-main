@@ -6,9 +6,38 @@
 
 [中文](https://docs.ultralytics.com/zh/) | [한국어](https://docs.ultralytics.com/ko/) | [日本語](https://docs.ultralytics.com/ja/) | [Русский](https://docs.ultralytics.com/ru/) | [Deutsch](https://docs.ultralytics.com/de/) | [Français](https://docs.ultralytics.com/fr/) | [Español](https://docs.ultralytics.com/es/) | [Português](https://docs.ultralytics.com/pt/) | [Türkçe](https://docs.ultralytics.com/tr/) | [Tiếng Việt](https://docs.ultralytics.com/vi/) | [العربية](https://docs.ultralytics.com/ar/) <br>
 
-#### 导出适配 RKNPU 的模型
+# Ultralytics YOLOv11 高级 RKNN 优化版 🚀
 
-关于如何导出适配 RKNPU 分割/检测/姿态/旋转框 模型，请参考 [RKOPT_README_CN.md](RKOPT_README_CN.md), 该优化只在导出模型时生效，训练代码按照原仓库的指引即可。
+[![GitHub stars](https://img.shields.io/github/stars/kaguya810/ultralytics_yolov11-main)](https://github.com/kaguya810/ultralytics_yolov11-main/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/kaguya810/ultralytics_yolov11-main)](https://github.com/kaguya810/ultralytics_yolov11-main/network)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%203.0-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+
+**基于最新 Ultralytics 的现代化分支，具备先进的 RKNN 优化和 YOLOv11 支持**
+
+本仓库提供了一个现代化的替代方案，解决了过时的 Rockchip YOLO 实现问题，特性包括：
+
+## ✨ 核心特性
+
+- 🔥 **最新 YOLOv11 架构**: 基于最新稳定版 Ultralytics 分支
+- ⚡ **先进 RKNN 优化**: 针对瑞芯微 NPU 设备优化的导出流水线
+- 🎯 **全面模型支持**: 检测、分割、姿态估计和 OBB 模型
+- 🔧 **可扩展设计**: 便于集成自定义模块和架构
+- 🚀 **性能为先**: 针对嵌入式部署优化的推理流水线
+
+## 🚀 RKNN 优化功能
+
+相比过时的替代方案，本实现提供：
+
+- **现代化工具链**: 简化的 PT → ONNX (RKNN格式) → RKNN 转换流程
+- **NPU 优化架构**: 移除后处理和 DFL 操作以获得更好的量化效果
+- **增强性能**: 添加置信度求和分支以加速后处理
+- **保持精度**: 所有优化均保持推理结果不变
+
+详细的 RKNN 导出说明：
+- **English**: [RKOPT_README.md](RKOPT_README.md)  
+- **中文**: [RKOPT_README.zh-CN.md](RKOPT_README.zh-CN.md)
+
+> 💡 **注意**: RKNN 优化仅影响模型导出，训练遵循标准 Ultralytics 流程。
 
 ---
 

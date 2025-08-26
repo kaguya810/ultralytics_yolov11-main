@@ -1,6 +1,6 @@
 # Ultralytics YOLO 🚀, AGPL-3.0 license
 """
-Export a YOLOv8 PyTorch model to other formats. TensorFlow exports authored by https://github.com/zldrobit.
+Export a YOLOv11 PyTorch model to other formats. TensorFlow exports authored by https://github.com/zldrobit.
 
 Format                  | `format=argument`         | Model
 ---                     | ---                       | ---
@@ -96,7 +96,7 @@ from ultralytics.utils.torch_utils import TORCH_1_13, get_latest_opset, select_d
 
 
 def export_formats():
-    """YOLOv8 export formats."""
+    """YOLOv11 export formats."""
     import pandas  # scope for faster 'import ultralytics'
 
     x = [
@@ -389,7 +389,7 @@ class Exporter:
 
     @try_export
     def export_rknn(self, prefix=colorstr('RKNN:')):
-        """YOLOv8 RKNN model export."""
+        """YOLOv11 RKNN model export."""
         LOGGER.info(f'\n{prefix} starting export with torch {torch.__version__}...')
 
         # ts = torch.jit.trace(self.model, self.im, strict=False)
@@ -414,7 +414,7 @@ class Exporter:
 
     @try_export
     def export_onnx(self, prefix=colorstr("ONNX:")):
-        """YOLOv8 ONNX export."""
+        """YOLOv11 ONNX export."""
         requirements = ["onnx>=1.12.0"]
         if self.args.simplify:
             requirements += ["onnxslim>=0.1.31", "onnxruntime" + ("-gpu" if torch.cuda.is_available() else "")]
