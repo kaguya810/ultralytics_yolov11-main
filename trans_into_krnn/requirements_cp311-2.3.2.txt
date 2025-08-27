@@ -1,7 +1,7 @@
 # if install failed, please change the pip source to 'https://pypi.tuna.tsinghua.edu.cn/simple/'
 
 # base deps
-protobuf>=4.21.6,<=4.25.4
+protobuf>=4.21.6,<=6.32.0
 
 # utils
 psutil>=5.9.0
